@@ -1,0 +1,30 @@
+Training : python train.py --data /home/islab/drone/yolov5/data/drone18_태화교.yaml --cfg yolov5x.yaml --weights '/home/islab/drone/yolov5/runs/train/금호지구3/weights/best.pt' --batch-size 16 --img-size 1280 --adam --hyp /home/islab/drone/yolov5/data/hyp.finetune.yaml --epochs 100 --name 태호교_30m이하_plus1
+
+python train.py --data /home/oem/drone/yolov5/data/drone18_classification.yaml --cfg yolov5x.yaml --weights '/home/oem/drone/yolov5/runs/train/금호지구3/weights/best.pt' --batch-size  --img-size 960 --adam --hyp /home/oem/drone/yolov5/data/hyp.finetune.yaml --epochs 200 --name classification_plus2_x
+yolov5 안에 drone18.py를 copy&paste 한 다음 data 경로를 맞춰줘야함.
+데이터수가 작으면 batch-size 16 가능. 많으면 8
+
+------------------------------------------------------------------------------------------------------
+
+detection
+python detect_ori.py --source '/media/islab/4TB1/태화교/30m 이하/15도/울산_태화교_30m_15도_20200720/video' --img-size 1280 --weights /home/islab/drone/yolov5/runs/train/태호교_30m이하_plus1/weights/best.pt --conf-thres 0.8 --iou-thres 0.8 --name 울산_태화교_30m_15도_20200720_video_test_태화교_30m이하_plus1 --project /media/islab/4TB1/runs/detect --device 1
+
+python detect.py --source '/media/islab/4TB1/울산_대왕암공원/30m이하/50도/울산_대왕암공원_30m_50도_20201023/images' --img-size 1280 --weights /home/islab/drone/yolov5/runs/train/울산_대왕암_4차_전체/weights/best.pt --conf-thres 0.8 --iou-thres 0.8 --name 울산_대왕암공원_30m_50도_20201023 --save-txt --save-json --save-conf --project /media/islab/4TB1/runs/detect --nosave
+
+nohup python detect.py --source '/home/test/drone/data/제주_누웨마루_100m_45도/0926_2' --img-size 960 --weights /home/test/drone/yolov5/runs/train/누웨마루3_100m_60도/weights/best.pt --conf-thres 0.7 --iou-thres 0.8 --name 제주_누웨마루_100m_45도_0926_2 --save-txt --save-json --save-conf &
+
+conda activate yolov5
+
+ffmpeg -i '/media/islab/4TB3/runs/detect/대구_수성못_60m_45도_20200913/image/관광지_202009131728_60m_대구_수성못_카메라_45도_4'/%08d.jpg '/media/islab/4TB3/runs/detect/대구_수성못_60m_45도_20200913/image/video/관광지_202009131728_60m_대구_수성못_카메라_45도_4.MP4'
+
+ffmpeg -i '/media/islab/4TB3/20210403json_생성용/도심지/제주_누웨마루/60m 이하/45도/제주_누웨마루_60m_45도_20201105/video/도심지_202011051254_60m_제주_누웨마루거리_카메라_45_4.MP4' '/media/islab/4TB3/20210403json_생성용/도심지/제주_누웨마루/60m 이하/45도/제주_누웨마루_60m_45도_20201105/images/도심지_202011051254_60m_제주_누웨마루거리_카메라_45_4'/%08d.jpg
+
+python split.py --datadir='/media/islab/4tb/yk_data_test/data' --split=0.3 --train_output='/media/islab/4tb/yk_data_test/train' --test_output='/media/islab/4tb/yk_data_test/val'
+
+python main_bbox.py --json_path '/media/islab/4tb/json_생성용/도심지/누웨마루/60m 이하/60도/제주_누웨마루거리_60m_60도_20200925' --video_path '/media/islab/4tb/json_생성용/도심지/누웨마루/60m 이하/60도/제주_누웨마루거리_60m_60도_20200925'
+
+
+python train.py --data /home/islab/drone/yolov5/data/drone18_산림지_작천정_202008241630_1.yaml --weights '/home/islab/drone/yolov5/runs/train/작천정_통합_exp51/weights/best.pt' --batch-size 16 --img-size 960 --adam --hyp data/hyp.finetune.yaml --epochs 100 --name 작천정_202008241630_1_1
+
+
+python detect.py --source '/media/islab/4tb/json_생성용/산림지/작천정/산림지_20200826_60m_울산_작천정_카메라_45도/images1_1' --img-size 960 --weights /home/islab/drone/yolov5/runs/train/작천정_202008261052_1_작천정_202008241708_1_전체_작천정_20201630_1_2/weights/best.pt --conf-thres 0.5 --iou-thres 0.5 --name 작천정_202008261052_1_작천정_202008261052_1 --save-txt --save-json --save-conf
