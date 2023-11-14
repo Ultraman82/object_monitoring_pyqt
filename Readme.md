@@ -1,7 +1,6 @@
-
 # Object detection with drone image
 
-![](12-07_demo.mp4)
+[Demo Video](https://drive.google.com/file/d/1c6B75dN7gauqOZ6CKz8IihHqB-95Z3wI/view)
 
 ## Features
 
